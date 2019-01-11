@@ -1,0 +1,55 @@
+.box {
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 15px;
+    margin-top: 25px;
+}
+
+.box:not(:first-child){
+    margin-top: 75px;
+}
+
+div#info div#jam {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+div#vote button {
+    font-size: 42px;
+    margin: 0 10px;
+}
+
+div#vote span.spinner-border {
+    width: 33px;
+    height: 33px;
+}
+
+div#vote.canvote span.spinner-border {
+    display: none;
+}
+
+div#suggestion form button span.spinner-border,
+div#suggestion form div.alert-success,
+div#suggestion form div.alert-danger,
+div#suggestion form div.alert-warning {
+    display: none;
+}
+
+div#suggestion form.sending button span.spinner-border {
+    display: inherit;
+}
+
+div#suggestion form.success div.alert-success {
+    display: inherit;
+}
+
+div#suggestion form.error div.alert-danger {
+    display: inherit;
+}
+
+div#suggestion form.duplicate div.alert-warning {
+    display: inherit;
+}
+
+div#suggestion form.success div.alert-success span#themeNameSuccess {
+    font-weight: bold;
+}

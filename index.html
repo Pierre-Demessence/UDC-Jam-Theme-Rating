@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+
+    <title>UDC Jam Themes</title>
+
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">UDC Jam Themes</a>
+        <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-target="#navbarResponsive" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+
+            <div id="info" class="box">
+                <h4 class="mt-5">Next Jam:</h4>
+                <div id="jam">UDC Jam Week #3</div>
+                <p class="lead">Starts Saturday the 2<sup>nd</sup> of February - <a
+                        href="https://itch.io/jam/udc-jam-week-3">Join Here</a></p>
+            </div>
+
+            <div id="vote" class="box">
+                <h3>Rate this Theme:<br>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <strong><span id="theme"></span></strong>
+                </h3>
+
+                <button class="btn btn-danger" onclick="ThemeVoted(event, 'N')">👎</button>
+                <button class="btn btn-success" onclick="ThemeVoted(event, 'P')">👍</button>
+            </div>
+
+            <div id="suggestion" class="box">
+                <h4>Suggest a Theme:</h4>
+
+                <form onsubmit="ThemeSuggested(event)" oninput="FormChanged(event)">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter theme"
+                               aria-describedby="suggestionhelp" required>
+                        <small id="suggestionhelp" class="form-text text-muted">
+                            Please keep it as short and clear as possible. Prefer
+                            <mark>"Platformer"</mark>
+                            instead of
+                            <mark>"A platformer game"</mark>
+                            for example.
+                        </small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span class="text">Submit</span>
+                    </button>
+                    <br>
+                    <br>
+                    <div class="alert alert-success" role="alert">
+                        Your theme <span id="themeNameSuccess"></span> has been successfully added!
+                    </div>
+                    <div class="alert alert-danger" role="alert">
+                        There was an error adding the theme, please try again.
+                    </div>
+                    <div class="alert alert-warning" role="alert">
+                        This theme has already been suggested.
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script crossorigin="anonymous"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"
+        integrity="sha256-7/yoZS3548fXSRXqc/xYzjsmuW3sFKzuvOCHd06Pmps="
+        crossorigin="anonymous"></script>
+
+<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-database.js"></script>
+
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyB2j8u1-67k0uvUoJLpm1wdIKYcK-38D1Y",
+        authDomain: "udc-jam-themes-votes.firebaseapp.com",
+        databaseURL: "https://udc-jam-themes-votes.firebaseio.com",
+        projectId: "udc-jam-themes-votes",
+        storageBucket: "udc-jam-themes-votes.appspot.com",
+        messagingSenderId: "912972488865"
+    };
+    firebase.initializeApp(config);
+</script>
+
+<script src="js/main.js"></script>
+
+</body>
+
+</html>
