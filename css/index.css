@@ -13,6 +13,10 @@ div#info div#jam {
     font-weight: bold;
 }
 
+/*
+ ##### Vote #####
+ */
+
 div#vote button {
     font-size: 42px;
     margin: 0 10px;
@@ -26,6 +30,27 @@ div#vote span.spinner-border {
 div#vote.canvote span.spinner-border {
     display: none;
 }
+
+div#vote.canvote span.spinner-border {
+    display: none;
+}
+
+div#vote div.alert-danger,
+div#vote div.alert-info {
+    display: none;
+}
+
+div#vote.error div.alert-danger {
+    display: inherit;
+}
+
+div#vote.nomore div.alert-info {
+    display: inherit;
+}
+
+/*
+ ##### Suggestion #####
+ */
 
 div#suggestion form button span.spinner-border,
 div#suggestion form div.alert-success,

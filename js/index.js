@@ -1,29 +1,20 @@
-let Themes = null;
-let TotalNbRatings = null;
-let TotalScore = null;
-const ThemesRef = firebase.database().ref('/');
-
-ThemesRef.on('value', function(snapshot) {
-    Themes = {};
-    let TotalScore = 0;
-    snapshot.forEach(function(theme) {
-        Themes[theme.key] = theme.val();
-        Themes[theme.key].id = theme.key;
-        Themes[theme.key].nbRatings = theme.val().ratingPositive + theme.val().ratingNegative;
-        Themes[theme.key].score = theme.val().ratingPositive - theme.val().ratingNegative;
-        TotalNbRatings += Themes[theme.key].nbRatings;
-        TotalScore += Themes[theme.key].score;
-    });
-    console.log(Themes);
-    console.log(TotalNbRatings);
-    console.log(TotalScore);
-});
-
-
 let CurrentTheme = null;
 
+let RatedThemesData = localStorage.getItem("ratedThemes");
+let RatedThemes = RatedThemesData == null ? Array() : RatedThemesData.split(',');
+
 function GetRandomTheme() {
-    return _.sample(Themes);
+    if (RatedThemes.length >= _.size(Themes)) return null;
+
+    let nonRatedThemes = _.omit(Themes, RatedThemes);
+
+    CalculateWeights(nonRatedThemes);
+
+    let r = Math.random();
+    for (let id in nonRatedThemes)
+        if (r < nonRatedThemes[id].stackedChances)
+            return nonRatedThemes[id];
+    return _.sample(nonRatedThemes);
 }
 
 function SetNewTheme(newTheme) {
@@ -33,10 +24,19 @@ function SetNewTheme(newTheme) {
     let buttonPositive = voteBox.querySelector("button.btn-success");
 
     CurrentTheme = newTheme;
-    themeBox.innerHTML = CurrentTheme.themeName;
 
     voteBox.classList.add("canvote");
     voteBox.classList.remove("voting");
+    voteBox.classList.remove("error");
+    voteBox.classList.remove("nothing");
+
+    if (newTheme == null) {
+        themeBox.innerHTML = "...";
+        voteBox.classList.add("nomore");
+        return;
+    }
+
+    themeBox.innerHTML = CurrentTheme.themeName;
 
     buttonNegative.disabled = false;
     buttonPositive.disabled = false;
@@ -62,17 +62,28 @@ function ThemeVoted(event, vote) {
     voteBox.classList.remove("canvote");
     voteBox.classList.add("voting");
 
-    console.log(CurrentTheme);
-
     let data = {};
     let field = vote == 'P' ? "ratingPositive" : "ratingNegative";
     data[field] = CurrentTheme[field] + 1;
 
     ThemesRef.child(CurrentTheme.id).update(data)
-        .then(function() {
-            setTimeout(() => SetNewTheme(GetRandomTheme()), 1000);
+        .then(() => {
+            RatedThemes.push(CurrentTheme.id);
+            RatedThemes = _.uniq(RatedThemes);
+            localStorage.setItem("ratedThemes", RatedThemes);
+            setTimeout(() => SetNewTheme(GetRandomTheme()), 250);
+        })
+        .catch(err => {
+            console.error(err);
+            SetNewTheme(CurrentTheme);
+            voteBox.classList.add("error");
+            voteBox.querySelector("div.alert-danger #error").innerHTML = err;
         });
 }
+
+/*
+ ##### Suggestion #####
+ */
 
 function ThemeSuggested(event) {
     event.preventDefault();
@@ -120,15 +131,17 @@ function ThemeSuggested(event) {
         ratingPositive: 0,
         ratingNegative: 0
     }).then(() => {
-        form.className = "success";
-        form.reset();
-        EnableForm();
+        setTimeout(() => {
+            form.className = "success";
+            form.reset();
+            EnableForm();
+        }, 500);
     }).catch(err => {
+        console.error(err);
         form.className = "error";
+        form.querySelector("div.alert-danger #error").innerHTML = err;
         EnableForm();
     });
-
-
 }
 
 function FormChanged(event) {

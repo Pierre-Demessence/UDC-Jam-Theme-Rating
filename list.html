@@ -8,7 +8,7 @@
     <meta content="" name="description">
     <meta content="" name="author">
 
-    <title>UDC Jam Themes</title>
+    <title>UDC Jam Themes - List</title>
 
     <!-- Bootstrap CSS -->
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -16,7 +16,8 @@
 
     <link rel="stylesheet" id="darktheme" type="text/css" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
 
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/cr-1.5.0/fh-3.1.4/sl-1.2.6/datatables.min.css"/>
 
 </head>
 
@@ -50,72 +51,17 @@
 <!-- Page Content -->
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 text-center">
-
-            <div id="info" class="box">
-                <h4 class="mt-5">Next Jam:</h4>
-                <div id="jam">UDC Jam Week #3</div>
-                <p class="lead">Starts Saturday the 2<sup>nd</sup> of February - <a
-                        href="https://itch.io/jam/udc-jam-week-3">Join Here</a></p>
+        <div class="col-lg-12 text-center" style="margin: 25px 0;">
+            <div id="example_wrapper">
+                <table class="table table-hover table-striped">
+                    <tfoot>
+                    <tr>
+                        <th colspan="4" style="text-align:right">Ratings:</th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                </table>
             </div>
-
-            <div id="vote" class="box">
-                <h3>Rate this Theme:<br>
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    <strong><span id="theme"></span></strong>
-                </h3>
-
-                <button class="btn btn-danger" onclick="ThemeVoted(event, 'N')" disabled>👎</button>
-                <button class="btn btn-success" onclick="ThemeVoted(event, 'P')" disabled>👍</button>
-                <br>
-                <br>
-                <div class="alert alert-danger" role="alert">
-                    There was an error adding the theme, please try again.
-                    <strong>
-                        <div id="error"></div>
-                    </strong>
-                </div>
-                <div class="alert alert-info" role="alert">
-                    It seems you have voted for all the themes! Please come back later.
-                </div>
-            </div>
-
-            <div id="suggestion" class="box">
-                <h4>Suggest a Theme:</h4>
-
-                <form onsubmit="ThemeSuggested(event)" oninput="FormChanged(event)">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter theme"
-                               aria-describedby="suggestionhelp" required>
-                        <small id="suggestionhelp" class="form-text text-muted">
-                            Please keep it as short and clear as possible. Prefer
-                            <mark>"Platformer"</mark>
-                            instead of
-                            <mark>"A platformer game"</mark>
-                            for example.
-                        </small>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        <span class="text">Submit</span>
-                    </button>
-                    <br>
-                    <br>
-                    <div class="alert alert-success" role="alert">
-                        Your theme <span id="themeNameSuccess"></span> has been successfully added!
-                    </div>
-                    <div class="alert alert-danger" role="alert">
-                        There was an error adding the theme, please try again.
-                        <strong>
-                            <div id="error"></div>
-                        </strong>
-                    </div>
-                    <div class="alert alert-warning" role="alert">
-                        This theme has already been suggested.
-                    </div>
-                </form>
-            </div>
-
         </div>
     </div>
 </div>
@@ -135,6 +81,11 @@
         integrity="sha256-7/yoZS3548fXSRXqc/xYzjsmuW3sFKzuvOCHd06Pmps="
         crossorigin="anonymous"></script>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/cr-1.5.0/fh-3.1.4/sl-1.2.6/datatables.min.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-database.js"></script>
 
@@ -152,7 +103,7 @@
 </script>
 
 <script src="js/data.js"></script>
-<script src="js/index.js"></script>
+<script src="js/list.js"></script>
 
 </body>
 
