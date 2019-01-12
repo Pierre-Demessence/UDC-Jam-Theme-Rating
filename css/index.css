@@ -27,6 +27,10 @@ div#vote span.spinner-border {
     height: 33px;
 }
 
+div#vote span#theme {
+
+}
+
 div#vote.canvote span.spinner-border {
     display: none;
 }

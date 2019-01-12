@@ -27,8 +27,8 @@ function CalculateWeights(Themes) {
 
     let totalChances = 0;
     for (let id in Themes) {
-        Themes[id].chances = (Themes[id].weight / totalWeights);
-        totalChances += Themes[id].chances;
+        Themes[id].chances = (Themes[id].weight / totalWeights) * 100;
+        totalChances += Themes[id].chances / 100;
         Themes[id].stackedChances = totalChances;
     }
 }
