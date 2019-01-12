@@ -3,6 +3,10 @@ let CurrentTheme = null;
 let RatedThemesData = localStorage.getItem("ratedThemes");
 let RatedThemes = RatedThemesData == null ? Array() : RatedThemesData.split(',');
 
+function CleanThemeName(themeName) {
+    return themeName.trim().toUpperCase();
+}
+
 function GetRandomTheme() {
     if (RatedThemes.length >= _.size(Themes)) return null;
 
@@ -36,7 +40,7 @@ function SetNewTheme(newTheme) {
         return;
     }
 
-    themeBox.innerHTML = CurrentTheme.themeName;
+    themeBox.innerHTML = CleanThemeName(CurrentTheme.themeName);
 
     buttonNegative.disabled = false;
     buttonPositive.disabled = false;
@@ -92,10 +96,6 @@ function ThemeSuggested(event) {
         for (let id in Themes)
             if (Themes[id].themeName == themeName) return true;
         return false;
-    }
-
-    function CleanThemeName(themeName) {
-        return themeName.trim().toUpperCase();
     }
 
     function EnableForm() {
