@@ -40,7 +40,7 @@ function SetNewTheme(newTheme) {
         return;
     }
 
-    themeBox.innerHTML = CleanThemeName(CurrentTheme.themeName);
+    themeBox.innerText = CleanThemeName(CurrentTheme.themeName);
 
     buttonNegative.disabled = false;
     buttonPositive.disabled = false;

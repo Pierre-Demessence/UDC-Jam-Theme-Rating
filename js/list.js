@@ -2,7 +2,7 @@ let table = $('table').DataTable({
     columns: [
         {title: "Select"},
         {title: "ID", data: 'id'},
-        {title: "Theme", data: 'themeName'},
+        {title: "Theme", data: 'themeName', render: $.fn.dataTable.render.text()},
         {title: "Score", data: 'score'},
         {title: "Ratings", data: 'nbRatings'},
         {title: "PositiveRatings", data: 'ratingPositive'},
